@@ -14,7 +14,9 @@ const ReactionSchema = new Schema(
         },
         username: {
             type: String,
-            required: true
+            required: true,
+            trim: true,
+
         },
         createdAt: {
             type: Date,
@@ -46,7 +48,6 @@ const ThoughtSchema = new Schema(
         username: {
             type: String,
             required: true,
-            ref: 'User'
         },
         reactions: [ReactionSchema]
     },
@@ -59,7 +60,7 @@ const ThoughtSchema = new Schema(
     }
 );
 
-ThoughtSchema.virtuals('reactionCount').get(function(){
+ThoughtSchema.virtual('reactionCount').get(function(){
     return this.reactions.length;
 });
 
